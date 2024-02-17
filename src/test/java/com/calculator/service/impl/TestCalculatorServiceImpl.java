@@ -8,31 +8,32 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class TestCalculatorServiceImpl {
 
     @InjectMocks
-    CalculatorService calculatorService;
+    CalculatorServiceImpl calculatorService;
 
     @Test
     public void addEmptyStringTest() {
-        when(calculatorService.addString("")).thenReturn(0);
+        assertEquals(0, calculatorService.addString(""));
     }
 
     @Test
     public void addSingleNumberTest() {
-        when(calculatorService.addString("2")).thenReturn(2);
+        assertEquals(2, calculatorService.addString("2"));
     }
 
     @Test
     public void addMultipleNumberTest() {
-        when(calculatorService.addString("2,3,4")).thenReturn(9);
+        assertEquals(9, calculatorService.addString("2,3,4"));
     }
 
     @Test
     public void addMultipleNumberWithNewLineTest() {
-        when(calculatorService.addString("1 "+" \n 2,3")).thenReturn(6);
+        assertEquals(6, calculatorService.addString("1 \"+\" \\n 2,3"));
     }
 }
